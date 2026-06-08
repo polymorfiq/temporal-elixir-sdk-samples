@@ -4,7 +4,7 @@ These are example workflows that also serve as a set of integration tests for th
 
 ## Workflow Examples
 
-Workflow examples can be found in [lib/workflows].
+Workflow examples can be found in [lib/workflows](lib/workflows).
 
 ## Integration Tests
 
