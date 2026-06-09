@@ -3,12 +3,13 @@ defmodule TemporalSamples.Workflows.ErlangTermFormatTest do
 
   require TemporalSamples.Workflows.ErlangTermFormat
 
-  alias Temporal.{Client, Worker, TaskQueue, Workflow}
+  alias Temporal.{Client, Runtime, TaskQueue, Workflow, Worker}
   alias TemporalSamples.Workflows.ErlangTermFormat
 
   setup do
     # Connect to Temporal Server
-    {:ok, client} = Client.new("localhost:7233")
+    {:ok, runtime} = Runtime.with_id(System.unique_integer())
+    {:ok, client} = Client.new("localhost:7233", runtime: runtime)
     on_exit(fn -> Client.stop(client) end)
 
     {:ok, client: client}

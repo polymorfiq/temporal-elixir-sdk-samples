@@ -1,14 +1,14 @@
 defmodule TemporalSamples.Workflows.HelloWorldTest do
   use ExUnit.Case
-
-  alias Temporal.{Client, Worker, TaskQueue, Workflow}
-  alias TemporalSamples.Workflows.HelloWorld
-
   require TemporalSamples.Workflows.HelloWorld
+
+  alias Temporal.{Client, Runtime, TaskQueue, Workflow, Worker}
+  alias TemporalSamples.Workflows.HelloWorld
 
   setup do
     # Connect to Temporal Server
-    {:ok, client} = Client.new("localhost:7233")
+    {:ok, runtime} = Runtime.with_id(System.unique_integer())
+    {:ok, client} = Client.new("localhost:7233", runtime: runtime)
     on_exit(fn -> Client.stop(client) end)
 
     {:ok, client: client}
