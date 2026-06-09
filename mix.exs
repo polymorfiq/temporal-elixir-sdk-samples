@@ -20,9 +20,16 @@ defmodule TemporalSamples.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
+    temporal_lib =
+      if System.get_env("LOCAL_TEMPORAL") == "1" do
+        {:temporal, "~> 0.0.1", path: "../temporal"}
+      else
+        {:temporal, "~> 0.0.1",
+         github: "polymorfiq/temporal-elixir-sdk", ref: "21765acaa1b8c7a2b02eb5749e606b09fd9f0c5e"}
+      end
+
     [
-      {:temporal, "~> 0.0.1",
-       github: "polymorfiq/temporal-elixir-sdk", ref: "dbf241b7facb05bf38587ea2b0f13504079fdb4a"},
+      temporal_lib,
       {:ex_doc, "~> 0.21", only: :dev, runtime: false}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
