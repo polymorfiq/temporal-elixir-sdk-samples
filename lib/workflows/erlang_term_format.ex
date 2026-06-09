@@ -34,8 +34,6 @@ defmodule TemporalSamples.Workflows.ErlangTermFormat do
         start_to_close_timeout: {1, :seconds}
       )
 
-    {:ok, {:greeting, greeting_1}} = Workflow.get(ctx, given_name)
-
     fname = Keyword.fetch!(kw_list_input, :first_name)
     lname = Keyword.fetch!(kw_list_input, :last_name)
 
@@ -48,7 +46,8 @@ defmodule TemporalSamples.Workflows.ErlangTermFormat do
       )
 
     # Get result of activity (blocks until activity finished).
-    with {:ok, {:greeting, greeting_2}} <- Workflow.get(ctx, first_last_name) do
+    with {:ok, {:greeting, greeting_1}} <- Workflow.get(ctx, given_name),
+         {:ok, {:greeting, greeting_2}} <- Workflow.get(ctx, first_last_name) do
       {:ok, [greeting_1, greeting_2]}
     end
   end

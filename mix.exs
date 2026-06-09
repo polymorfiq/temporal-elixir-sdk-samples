@@ -7,14 +7,15 @@ defmodule TemporalSamples.MixProject do
       version: "0.1.0",
       elixir: "~> 1.19",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      prune_code_paths: false,
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -25,7 +26,7 @@ defmodule TemporalSamples.MixProject do
         {:temporal, "~> 0.0.1", path: "../temporal"}
       else
         {:temporal, "~> 0.0.1",
-         github: "polymorfiq/temporal-elixir-sdk", ref: "21765acaa1b8c7a2b02eb5749e606b09fd9f0c5e"}
+         github: "polymorfiq/temporal-elixir-sdk", ref: "622a4abe86418a45588d6063e5e2c198b7d9d631"}
       end
 
     [

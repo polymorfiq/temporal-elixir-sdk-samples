@@ -6,10 +6,15 @@ defmodule TemporalSamples.Workflows.HelloWorldTest do
 
   require TemporalSamples.Workflows.HelloWorld
 
-  test "greets the world" do
+  setup do
     # Connect to Temporal Server
     {:ok, client} = Client.new("localhost:7233")
+    on_exit(fn -> Client.stop(client) end)
 
+    {:ok, client: client}
+  end
+
+  test "greets the world", %{client: client} do
     # Start a worker on the Task Queue
     queue = TaskQueue.new(client, "#{__MODULE__}")
     {:ok, worker} = Worker.new(queue)
