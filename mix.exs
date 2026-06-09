@@ -22,7 +22,8 @@ defmodule TemporalSamples.MixProject do
   defp deps do
     [
       {:temporal, "~> 0.0.1",
-       github: "polymorfiq/temporal-elixir-sdk", sha: "9487f6756df91d1a1c6ac25d556a52e3bdd6fe9f"}
+       github: "polymorfiq/temporal-elixir-sdk", ref: "dbf241b7facb05bf38587ea2b0f13504079fdb4a"},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
