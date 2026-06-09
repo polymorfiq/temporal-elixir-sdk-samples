@@ -26,7 +26,7 @@ defmodule TemporalSamples.MixProject do
         {:temporal, "~> 0.0.1", path: "../temporal"}
       else
         {:temporal, "~> 0.0.1",
-         github: "polymorfiq/temporal-elixir-sdk", ref: "c70c81306a734c23f30b81eadd886344ad2f139b"}
+         github: "polymorfiq/temporal-elixir-sdk", ref: "a6716369640d67934e15ebc355ded767b7b56ba3"}
       end
 
     [
