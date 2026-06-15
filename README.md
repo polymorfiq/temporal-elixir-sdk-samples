@@ -7,10 +7,10 @@ These are example workflows that also serve as a set of integration tests for th
 You just pair a Frontend with your desired Backend in your Mix dependencies:
 ```elixir
 {:temporal, "~> 0.1.0",
-  github: "polymorfiq/temporal-elixir-sdk", ref: "819d1945d9db6af79b2d18339e596053e20d0543"},
+  github: "polymorfiq/temporal-elixir-sdk", ref: "c4e15ea49538a6cd6ffb728bc975d32f618f7c88"},
 
 {:temporal_engine_nif, "~> 0.1.0",
-  github: "polymorfiq/temporal-engine-nif", ref: "162200ee8fc1067c85d1e33a7cea881546ff3416"}
+  github: "polymorfiq/temporal-engine-nif", ref: "a2df19b33574fcb97a00f4294a8184d4b163037a"}
 ```
 
 Configure the SDK to select and engine and JSON encoder:
