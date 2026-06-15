@@ -17,7 +17,24 @@ defmodule TemporalSamples.Workflows.HelloWorldTest do
   test "greets the world", %{client: client} do
     # Start a worker on the Task Queue
     queue = TaskQueue.new(client, "#{__MODULE__}")
-    {:ok, worker} = Worker.new(queue)
+    {:ok, worker} = Worker.new(queue, [
+      max_cached_workflows: 100,
+      deployment_options: [
+        version: [build_id: "0.1.0", deployment_name: "elixir-sdk"],
+        use_worker_versioning: false,
+        default_versioning_behavior: nil
+      ],
+      task_types: [
+        enable_workflows: true,
+        enable_local_activities: true,
+        enable_remote_activities: true
+      ],
+      tuner: [
+        workflow_slot_supplier: [fixed_size: 10],
+        activity_slot_supplier: [fixed_size: 10],
+        local_activity_slot_supplier: [fixed_size: 10],
+      ]
+    ])
 
     # Register relevant activities and workflows
     :ok = Worker.register_workflow(worker, HelloWorld)
@@ -29,6 +46,6 @@ defmodule TemporalSamples.Workflows.HelloWorldTest do
       )
 
     # "Received message: Hello, World!"
-    {:ok, "Hello, World!"} = Workflow.get(handle)
+    {:ok, "Hello, World!"} = Workflow.result(handle)
   end
 end

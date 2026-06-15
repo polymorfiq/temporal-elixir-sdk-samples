@@ -21,17 +21,27 @@ defmodule TemporalSamples.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
-    temporal_lib =
+    temporal_libs =
       if System.get_env("LOCAL_TEMPORAL") == "1" do
-        {:temporal, "~> 0.0.1", path: "../temporal"}
+        [
+          {:temporal, "~> 0.1.0", path: "../temporal"},
+          {:temporal_engine, "~> 0.1.0", path: "../temporal_engine", override: true},
+          {:temporal_engine_nif, "~> 0.1.0", path: "../temporal_engine_nif"},
+        ]
       else
-        {:temporal, "~> 0.0.1",
-         github: "polymorfiq/temporal-elixir-sdk", ref: "a6716369640d67934e15ebc355ded767b7b56ba3"}
+        [
+          {:temporal, "~> 0.1.0",
+         github: "polymorfiq/temporal-elixir-sdk", ref: "c4e15ea49538a6cd6ffb728bc975d32f618f7c88"},
+
+          {:temporal_engine_nif, "~> 0.1.0",
+            github: "polymorfiq/temporal-engine-nif", ref: "a2df19b33574fcb97a00f4294a8184d4b163037a"}
+        ]
       end
 
-    [
-      temporal_lib,
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
+    temporal_libs ++ [
+      {:jason, "~> 1.4"},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]

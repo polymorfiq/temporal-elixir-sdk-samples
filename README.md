@@ -2,6 +2,25 @@
 
 These are example workflows that also serve as a set of integration tests for the [Temporal Elixir SDK](https://github.com/polymorfiq/temporal-elixir-sdk)
 
+## Using the SDK
+
+You just pair a Frontend with your desired Backend in your Mix dependencies:
+```elixir
+{:temporal, "~> 0.1.0",
+  github: "polymorfiq/temporal-elixir-sdk", ref: "819d1945d9db6af79b2d18339e596053e20d0543"},
+
+{:temporal_engine_nif, "~> 0.1.0",
+  github: "polymorfiq/temporal-engine-nif", ref: "162200ee8fc1067c85d1e33a7cea881546ff3416"}
+```
+
+Configure the SDK to select and engine and JSON encoder:
+```elixir
+# config.exs
+
+config :temporal, engine: TemporalEngineNif.Engine
+config :temporal_engine, json_encoder: Jason
+```
+
 ## Workflow Examples
 
 Workflow examples can be found in [lib/workflows](lib/workflows).
